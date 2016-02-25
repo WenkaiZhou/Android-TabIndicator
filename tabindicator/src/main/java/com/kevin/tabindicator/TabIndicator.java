@@ -25,9 +25,4 @@ public class TabIndicator extends LinearLayout implements ITabIndicator {
 		
 	}
 
-	@Override
-	public void setCurrentItem(int item) {
-		
-	}
-
 }

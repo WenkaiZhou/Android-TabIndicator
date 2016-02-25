@@ -1,21 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <attr name="icons" format="reference" />
-    <attr name="labels" format="reference" />
-    <attr name="selectedColor" format="color" />
-    <attr name="unselectedColor" format="color" />
-
-    <declare-styleable name="TabPageView">
-        <attr name="android:drawableTop" />
-        <attr name="android:text" />
-    </declare-styleable>
-    
-    <declare-styleable name="TabPageIndictor">
-		<attr name="icons" />
-		<attr name="labels" />
-        <attr name="selectedColor" />
-        <attr name="unselectedColor" />
+    <!-- TabIndicator -->
+    <declare-styleable name="TabIndicator">
+        <attr name="icons" format="reference" />
+        <attr name="selectedIcons" format="reference" />
+        <attr name="unselectedIcons" format="reference" />
+        <attr name="labels" format="reference" />
+        <attr name="selectedColor" format="color" />
+        <attr name="unselectedColor" format="color" />
         <attr name="android:textSize" />
     </declare-styleable>
 

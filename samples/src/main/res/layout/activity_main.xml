@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom" >
 
-        <com.kevin.tabindicator.TabPageIndicator
+        <com.kevin.tabindicator.TabPageIndicatorEx
             android:id="@+id/second_act_tpi"
             android:layout_width="match_parent"
             android:layout_height="60dp"

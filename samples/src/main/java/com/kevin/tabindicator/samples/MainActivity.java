@@ -7,7 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.kevin.tabindicator.TabPageIndicator;
+import com.kevin.tabindicator.TabPageIndicatorEx;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
-    private TabPageIndicator mTabPageIndictor;
+    private TabPageIndicatorEx mTabPageIndictor;
     private List<Fragment> mTabs = new ArrayList<>();
     private FragmentPagerAdapter mAdapter;
 
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        getActionBar().setDisplayShowHomeEnabled(false);
         mViewPager = (ViewPager) findViewById(R.id.id_viewpager);
-        mTabPageIndictor = (TabPageIndicator) this.findViewById(R.id.second_act_tpi);
+        mTabPageIndictor = (TabPageIndicatorEx) this.findViewById(R.id.second_act_tpi);
 
         initDatas();
 
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initTabIndicator() {
         mTabPageIndictor.setViewPager(mViewPager);
-        mTabPageIndictor.setOnTabSelectedListener(new TabPageIndicator.OnTabSelectedListener() {
+        mTabPageIndictor.setOnTabSelectedListener(new TabPageIndicatorEx.OnTabSelectedListener() {
 
             @Override
             public void onTabSelected(int index) {
