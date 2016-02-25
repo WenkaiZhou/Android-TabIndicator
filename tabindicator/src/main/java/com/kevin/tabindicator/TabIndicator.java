@@ -2,9 +2,7 @@ package com.kevin.tabindicator;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.LinearLayout;
-
-import com.kevin.tabindicator.internal.ITabIndicator;
+import com.kevin.tabindicator.internal.TabViewBase;
 
 /**
  * @ClassName: TabHostView
@@ -14,15 +12,19 @@ import com.kevin.tabindicator.internal.ITabIndicator;
  * @date 2016-2-24 10:16:20
  * @Author zhouwk
  */
-public class TabIndicator extends LinearLayout implements ITabIndicator {
+public class TabIndicator extends TabViewBase {
 
 	public TabIndicator(Context context) {
-		this(context, null);
+		super(context);
 	}
 	
 	public TabIndicator(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		
+	}
+
+	@Override
+	public void setSelected(boolean selected) {
+
 	}
 
 }
