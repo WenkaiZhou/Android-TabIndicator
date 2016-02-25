@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_feed">意见反馈</string>
+    <string name="action_group_chat">发起群聊</string>
+    <string name="action_add_friend">添加朋友</string>
+    <string name="action_scan">扫一扫</string>
+    <string name="action_search">搜索</string>
+    <string name="action_add">添加</string>
+    <string name="tab_weixin">微信</string>
+    <string name="tab_contact">通讯录</string>
+    <string name="tab_find">发现</string>
+    <string name="tab_me">我</string>
+
+</resources>

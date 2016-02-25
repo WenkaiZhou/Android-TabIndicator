@@ -1,0 +1,17 @@
+*.iml
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/captures
+
+/.idea
+/.gradle
+/build
+/local.properties
+/tabindicator/build
+/samples/build
+/samples/samples.iml
+/TabIndicator.iml

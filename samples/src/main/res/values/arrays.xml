@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 首页导航 -->
+    <string-array name="bottom_bar_labels">
+        <item>"微信"</item>
+        <item>"通讯录"</item>
+        <item>"发现"</item>
+        <item>"我"</item>
+    </string-array>
+    <string-array name="bottom_bar_icons">
+        <item>@mipmap/ic_menu_emoticons</item>
+        <item>@mipmap/ic_menu_friendslist</item>
+        <item>@mipmap/ic_menu_myplaces</item>
+        <item>@mipmap/ic_menu_start_conversation</item>
+    </string-array>
+
+</resources>

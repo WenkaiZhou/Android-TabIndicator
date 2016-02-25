@@ -1,0 +1,31 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:kevin="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/id_viewpager"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+    </android.support.v4.view.ViewPager>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom" >
+
+        <com.kevin.tabindicator.TabPageIndicator
+            android:id="@+id/second_act_tpi"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/tabbg"
+            android:textSize="12sp"
+            kevin:icons="@array/bottom_bar_icons"
+            kevin:labels="@array/bottom_bar_labels"
+            kevin:selectedColor="#ff0000"
+            kevin:unselectedColor="#555555" />
+    </FrameLayout>
+
+</LinearLayout>
