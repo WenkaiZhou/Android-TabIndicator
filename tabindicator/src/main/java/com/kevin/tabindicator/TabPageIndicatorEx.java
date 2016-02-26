@@ -5,8 +5,6 @@ import android.content.res.TypedArray;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.AttributeSet;
-import android.view.Gravity;
-import android.view.View;
 
 import com.kevin.tabindicator.internal.TabIndicatorBase;
 
@@ -25,8 +23,6 @@ public class TabPageIndicatorEx extends TabIndicatorBase<TabPageView> implements
 
 	/** 底部菜单图标数组 */
 	private int[] mDrawableIds;
-	/** 回调接口，用于获取tab的选中状态 */
-	private OnTabSelectedListener mTabListener;
 	/** 用于ViewPager会渐变颜色 */
 	private ViewPager mViewPager;
 
@@ -38,9 +34,6 @@ public class TabPageIndicatorEx extends TabIndicatorBase<TabPageView> implements
 
 	public TabPageIndicatorEx(Context context, AttributeSet attrs) {
 		super(context, attrs);
-
-		// 初始化控件
-		initRealView();
 	}
 
 	@Override
@@ -56,74 +49,18 @@ public class TabPageIndicatorEx extends TabIndicatorBase<TabPageView> implements
 		ta.recycle();
 	}
 
-	/**
-	 * 初始化控件
-	 */
-	private void initRealView() {
-		LayoutParams params = new LayoutParams(0, LayoutParams.MATCH_PARENT, 1);
-		params.gravity = Gravity.CENTER;
-
-		int size = mLabels.length;
-		for (int i = 0; i < size; i++) {
-			final int index = i;
-
-			TabPageView tabItemView = new TabPageView(getContext());
-			tabItemView.setPadding(mTabPadding, mTabPadding, mTabPadding, mTabPadding);
-			// 图标及文字
-			tabItemView.setIcon(mDrawableIds[i]);
-			tabItemView.setText(mLabels[i]);
-			tabItemView.setSelectedColor(mSelectedColor);
-			tabItemView.setUnselectedColor(mUnselectedColor);
-			tabItemView.setTextSize(mTextSize);
-
-			this.addView(tabItemView, params);
-			
-			tabItemView.setTag(index);						// CheckedTextView设置索引作为tag，以便后续更改颜色、图片等
-			mCheckedList.add(tabItemView);					// 将CheckedTextView添加到list中，便于操作
-			tabItemView.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					setTabsDisplay(index);					// 设置底部图片和文字的显示
-					if (null != mTabListener) {
-						mTabListener.onTabSelected(index);	// tab项被选中的回调事件
-					}
-				}
-			});
-
-			// 初始化 底部菜单选中状态,默认第一个选中
-			if (i == 0) {
-				tabItemView.setIconAlpha(1.0f);
-//				tabItemView.setBackgroundColor(Color.rgb(240, 241, 242));
-			} else {
-				tabItemView.setIconAlpha(0);
-//				view.setBackgroundColor(Color.rgb(250, 250, 250));
-			}
-
-		}
-		
+	@Override
+	protected TabPageView createTabView() {
+		return new TabPageView(getContext());
 	}
 
-
-	/**
-	 * 设置定义选中tab的接口回调
-	 * @param listener
-	 */
-	public void setOnTabSelectedListener(OnTabSelectedListener listener) {
-		this.mTabListener = listener;
+	@Override
+	protected void setProperties(TabPageView tabPageView, int index) {
+		tabPageView.setIcon(mDrawableIds[index]);
 	}
-	
-	/**
-	 * 定义选中tab的接口
-	 */
-	public interface OnTabSelectedListener {
-		void onTabSelected(int index);
-	}
-
 	
 	@Override
 	public void onPageScrollStateChanged(int position) {
-		
 	}
 
 	@Override
@@ -142,5 +79,4 @@ public class TabPageIndicatorEx extends TabIndicatorBase<TabPageView> implements
 	public void onPageSelected(int position) {
 //		setTabsDisplay(position);
 	}
-
 }

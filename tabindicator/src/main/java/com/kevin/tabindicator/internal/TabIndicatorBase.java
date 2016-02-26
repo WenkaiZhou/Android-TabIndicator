@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import com.kevin.tabindicator.R;
@@ -23,7 +24,7 @@ import java.util.List;
  *         注:如果您修改了本类请填写以下内容作为记录，如非本人操作劳烦通知，谢谢！！！
  * @author mender，Modified Date Modify Content:
  */
-public class TabIndicatorBase<T extends TabViewBase> extends LinearLayout implements ITabIndicator {
+public abstract class TabIndicatorBase<T extends TabViewBase> extends LinearLayout implements ITabIndicator {
 
     /** 底部菜单的文字数组 */
     protected CharSequence[] mLabels;
@@ -37,6 +38,8 @@ public class TabIndicatorBase<T extends TabViewBase> extends LinearLayout implem
     protected int mTabPadding;
     /** 存放底部菜单 */
     protected List<T> mCheckedList = new ArrayList<>();
+    /** 回调接口，用于获取tab的选中状态 */
+    protected OnTabSelectedListener mTabListener;
 
     public TabIndicatorBase(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -72,6 +75,53 @@ public class TabIndicatorBase<T extends TabViewBase> extends LinearLayout implem
         handleStyledAttributes(a);
         a.recycle();
 
+        initView();
+    }
+
+    /**
+     * 初始化控件
+     */
+    private void initView() {
+        LayoutParams params = new LayoutParams(0, LayoutParams.MATCH_PARENT, 1);
+        params.gravity = Gravity.CENTER;
+
+        int size = mLabels.length;
+        for (int i = 0; i < size; i++) {
+            final int index = i;
+
+            T tabItemView = createTabView();
+            tabItemView.setPadding(mTabPadding, mTabPadding, mTabPadding, mTabPadding);
+            // 图标及文字
+            tabItemView.setText(mLabels[i]);
+            tabItemView.setSelectedColor(mSelectedColor);
+            tabItemView.setUnselectedColor(mUnselectedColor);
+            tabItemView.setTextSize(mTextSize);
+            setProperties(tabItemView, i);
+
+            this.addView(tabItemView, params);
+
+            tabItemView.setTag(index);						// CheckedTextView设置索引作为tag，以便后续更改颜色、图片等
+            mCheckedList.add(tabItemView);				    // 将CheckedTextView添加到list中，便于操作
+            tabItemView.setOnClickListener(new OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    setTabsDisplay(index);					// 设置底部图片和文字的显示
+                    if (null != mTabListener) {
+                        mTabListener.onTabSelected(index);	// tab项被选中的回调事件
+                    }
+                }
+            });
+
+            // 初始化 底部菜单选中状态,默认第一个选中
+            if (i == 0) {
+                tabItemView.setSelected(true);
+//				tabItemView.setBackgroundColor(Color.rgb(240, 241, 242));
+            } else {
+                tabItemView.setSelected(false);
+//				view.setBackgroundColor(Color.rgb(250, 250, 250));
+            }
+        }
     }
 
     /**
@@ -82,6 +132,18 @@ public class TabIndicatorBase<T extends TabViewBase> extends LinearLayout implem
      */
     protected void handleStyledAttributes(TypedArray a) {
     }
+
+    /**
+     * 生成TabView
+     * @return
+     */
+    protected abstract T createTabView();
+
+    /**
+     * 设置特殊属性
+     * @param t
+     */
+    protected abstract void setProperties(T t, int index);
 
     /**
      * 设置底部导航中图片显示状态和字体颜色
@@ -115,6 +177,21 @@ public class TabIndicatorBase<T extends TabViewBase> extends LinearLayout implem
         }
         T tabView = mCheckedList.get(position);
         tabView.setIndicateDisplay(visible);
+    }
+
+    /**
+     * 设置定义选中tab的接口回调
+     * @param listener
+     */
+    public void setOnTabSelectedListener(OnTabSelectedListener listener) {
+        this.mTabListener = listener;
+    }
+
+    /**
+     * 定义选中tab的接口
+     */
+    public interface OnTabSelectedListener {
+        void onTabSelected(int index);
     }
 
 }
