@@ -5,8 +5,6 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.Gravity;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.kevin.tabindicator.R;
@@ -39,8 +37,6 @@ public class TabIndicatorBase<T extends TabViewBase> extends LinearLayout implem
     protected int mTabPadding;
     /** 存放底部菜单 */
     protected List<T> mCheckedList = new ArrayList<>();
-    /** 存放底部菜单每项View */
-    protected List<View> mViewList = new ArrayList<>();
 
     public TabIndicatorBase(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -96,10 +92,10 @@ public class TabIndicatorBase<T extends TabViewBase> extends LinearLayout implem
             T mIconView = mCheckedList.get(i);
             if ((Integer) (mIconView.getTag()) == index) {
                 mIconView.setSelected(true);
-//				mViewList.get(i).setBackgroundColor(Color.rgb(240, 241, 242));
+//				mCheckedList.get(i).setBackgroundColor(Color.rgb(240, 241, 242));
             } else {
                 mIconView.setSelected(false);
-//				mViewList.get(i).setBackgroundColor(Color.rgb(250, 250, 250));
+//				mCheckedList.get(i).setBackgroundColor(Color.rgb(250, 250, 250));
             }
         }
     }
@@ -113,12 +109,12 @@ public class TabIndicatorBase<T extends TabViewBase> extends LinearLayout implem
      *            是否显示，如果false，则都不显示
      */
     public void setIndicateDisplay(int position, boolean visible) {
-//        int size = mIndicateImgs.size();
-//        if (size <= position) {
-//            return;
-//        }
-//        IndicateView indicateImg = mIndicateImgs.get(position);
-//        indicateImg.setDisplay(visible);
+        int size = mCheckedList.size();
+        if (size <= position) {
+            return;
+        }
+        T tabView = mCheckedList.get(position);
+        tabView.setIndicateDisplay(visible);
     }
 
 }

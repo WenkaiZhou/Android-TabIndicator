@@ -1,11 +1,16 @@
 package com.kevin.tabindicator.internal;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Looper;
 import android.util.AttributeSet;
 import android.view.View;
+
+import com.kevin.tabindicator.R;
 
 /**
  * 版权所有：XXX有限公司
@@ -30,10 +35,14 @@ public abstract class TabViewBase extends View implements ITabView {
     protected int mUnselectedColor;
     /** 限制绘制icon的范围 */
     protected Rect mIconRect;
+    /** 限制绘制指示点的范围 */
+    private Rect mIndicatorRect;
+    /** 是否显示指示点 */
+    private boolean isIndicateDisplay;
 
     protected Paint mTextPaint = new Paint();
     protected Rect mTextBound = new Rect();
-
+    Bitmap mIconBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.update_hint);
     public TabViewBase(Context context) {
         super(context);
     }
@@ -55,6 +64,17 @@ public abstract class TabViewBase extends View implements ITabView {
         int top = (getMeasuredHeight() - mTextBound.height()) / 2 - bitmapWidth / 2;
         // 设置icon的绘制范围
         mIconRect = new Rect(left, top, left + bitmapWidth, top + bitmapWidth);
+        // 设置指示点的范围
+        mIndicatorRect = new Rect(left + bitmapWidth * 2/3, top, left+bitmapWidth, top + bitmapWidth /3);
+    }
+
+    /**
+     * 画指示点
+     * @param canvas
+     */
+    protected void drawIndicator(Canvas canvas) {
+        if(isIndicateDisplay)
+            canvas.drawBitmap(mIconBitmap, null, mIndicatorRect, null);
     }
 
     @Override
@@ -90,6 +110,16 @@ public abstract class TabViewBase extends View implements ITabView {
 
     @Override
     public abstract void setSelected(boolean selected);
+
+    /**
+     * 设置指示点的显示
+     *
+     * @param visible
+     *            是否显示，如果false，则都不显示
+     */
+    public void setIndicateDisplay(boolean visible) {
+        this.isIndicateDisplay = visible;
+    }
 
     // 重新测量文本绘制范围
     private void measureText(){

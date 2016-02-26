@@ -80,7 +80,6 @@ public class TabPageIndicatorEx extends TabIndicatorBase<TabPageView> implements
 			
 			tabItemView.setTag(index);						// CheckedTextView设置索引作为tag，以便后续更改颜色、图片等
 			mCheckedList.add(tabItemView);					// 将CheckedTextView添加到list中，便于操作
-			mViewList.add(tabItemView);							// 将各个tab的View添加到list
 			tabItemView.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -141,7 +140,7 @@ public class TabPageIndicatorEx extends TabIndicatorBase<TabPageView> implements
 
 	@Override
 	public void onPageSelected(int position) {
-		setTabsDisplay(position);
+//		setTabsDisplay(position);
 	}
 
 }

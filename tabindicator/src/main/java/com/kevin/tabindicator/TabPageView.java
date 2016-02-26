@@ -43,12 +43,14 @@ public class TabPageView extends TabViewBase implements ITabView {
 
 	@Override
 	protected void onDraw(Canvas canvas) {
+		super.onDraw(canvas);
 		int alpha = (int) Math.ceil((255 * mAlpha));
 		canvas.drawBitmap(mIconBitmap, null, mIconRect, null);
 		setupTargetBitmap(alpha);
 		drawSourceText(canvas, alpha);
 		drawTargetText(canvas, alpha);
 		canvas.drawBitmap(mBitmap, 0, 0, null);
+		drawIndicator(canvas);
 	}
 
 	private void setupTargetBitmap(int alpha) {
