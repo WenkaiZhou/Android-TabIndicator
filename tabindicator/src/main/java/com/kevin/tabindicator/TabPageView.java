@@ -11,6 +11,7 @@ import android.graphics.PorterDuffXfermode;
 import android.util.AttributeSet;
 
 import com.kevin.tabindicator.internal.ITabView;
+import com.kevin.tabindicator.internal.TabPageViewBase;
 import com.kevin.tabindicator.internal.TabViewBase;
 
 /**
@@ -24,7 +25,7 @@ import com.kevin.tabindicator.internal.TabViewBase;
  *         注:如果您修改了本类请填写以下内容作为记录，如非本人操作劳烦通知，谢谢！！！
  * @author mender，Modified Date Modify Content:
  */
-public class TabPageView extends TabViewBase implements ITabView {
+public class TabPageView extends TabPageViewBase implements ITabView {
 	private Bitmap mBitmap;
 	private Canvas mCanvas;
 	private Paint mPaint;

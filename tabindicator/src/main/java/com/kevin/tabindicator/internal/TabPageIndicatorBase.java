@@ -2,6 +2,7 @@ package com.kevin.tabindicator.internal;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 
 import com.kevin.tabindicator.R;
@@ -17,10 +18,12 @@ import com.kevin.tabindicator.R;
  *         注:如果您修改了本类请填写以下内容作为记录，如非本人操作劳烦通知，谢谢！！！
  * @author mender，Modified Date Modify Content:
  */
-public abstract class TabPageIndicatorBase<T extends TabViewBase> extends TabIndicatorBase<T>{
+public abstract class TabPageIndicatorBase<T extends TabPageViewBase> extends TabIndicatorBase<T> implements ViewPager.OnPageChangeListener {
 
     /** 是否渐变切换 */
     protected boolean mIsGradualChange;
+    /** 用于ViewPager会渐变颜色 */
+    private ViewPager mViewPager;
 
     public TabPageIndicatorBase(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -46,5 +49,32 @@ public abstract class TabPageIndicatorBase<T extends TabViewBase> extends TabInd
      */
     public boolean getIsGradualChange() {
         return mIsGradualChange;
+    }
+
+    public void setViewPager(ViewPager viewPager) {
+        this.mViewPager = viewPager;
+        mViewPager.addOnPageChangeListener(this);
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int position) {
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        if (mIsGradualChange && positionOffset > 0) {
+            T left = mCheckedList.get(position);
+            T right = mCheckedList.get(position + 1);
+
+            left.setIconAlpha(1 - positionOffset);
+            right.setIconAlpha(positionOffset);
+        }
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        if(!mIsGradualChange) {
+            setTabsDisplay(position);
+        }
     }
 }

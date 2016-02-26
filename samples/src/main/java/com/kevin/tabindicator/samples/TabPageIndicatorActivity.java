@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.kevin.tabindicator.TabPageIndicatorEx;
 
@@ -18,6 +20,8 @@ public class TabPageIndicatorActivity extends AppCompatActivity {
     private TabPageIndicatorEx mTabPageIndictor;
     private List<Fragment> mTabs = new ArrayList<>();
     private FragmentPagerAdapter mAdapter;
+
+    private boolean isGradualChange;
 
     private String[] mTitles = new String[] { "First Fragment!",
             "Second Fragment!", "Third Fragment!", "Fourth Fragment!" };
@@ -63,6 +67,21 @@ public class TabPageIndicatorActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add("改变切换模式");
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getTitle().toString().equals("改变切换模式")) {
+            mTabPageIndictor.setIsGradualChange(!isGradualChange);
+            isGradualChange = !isGradualChange;
+        }
+        return true;
+    }
+
     private void initTabIndicator() {
         mTabPageIndictor.setViewPager(mViewPager);
         mTabPageIndictor.setOnTabSelectedListener(new TabPageIndicatorEx.OnTabSelectedListener() {
@@ -74,7 +93,6 @@ public class TabPageIndicatorActivity extends AppCompatActivity {
         });
 
         mTabPageIndictor.setIndicateDisplay(1, true);
-        mTabPageIndictor.setIsGradualChange(false);
     }
 
 

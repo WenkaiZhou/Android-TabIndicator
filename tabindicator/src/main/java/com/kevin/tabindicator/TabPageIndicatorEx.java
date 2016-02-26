@@ -2,7 +2,6 @@ package com.kevin.tabindicator;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.AttributeSet;
 
@@ -23,8 +22,6 @@ public class TabPageIndicatorEx extends TabPageIndicatorBase<TabPageView> implem
 
 	/** 底部菜单图标数组 */
 	private int[] mDrawableIds;
-	/** 用于ViewPager会渐变颜色 */
-	private ViewPager mViewPager;
 
 	public TabPageIndicatorEx(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -51,32 +48,5 @@ public class TabPageIndicatorEx extends TabPageIndicatorBase<TabPageView> implem
 	@Override
 	protected void setProperties(TabPageView tabPageView, int index) {
 		tabPageView.setIcon(mDrawableIds[index]);
-	}
-
-	public void setViewPager(ViewPager viewPager) {
-		this.mViewPager = viewPager;
-		mViewPager.addOnPageChangeListener(this);
-	}
-	
-	@Override
-	public void onPageScrollStateChanged(int position) {
-	}
-
-	@Override
-	public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-		if (mIsGradualChange && positionOffset > 0) {
-			TabPageView left = mCheckedList.get(position);
-			TabPageView right = mCheckedList.get(position + 1);
-
-			left.setIconAlpha(1 - positionOffset);
-			right.setIconAlpha(positionOffset);
-		}
-	}
-
-	@Override
-	public void onPageSelected(int position) {
-		if(!mIsGradualChange) {
-			setTabsDisplay(position);
-		}
 	}
 }
