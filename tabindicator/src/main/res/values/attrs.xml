@@ -3,14 +3,24 @@
 
     <!-- TabIndicator -->
     <declare-styleable name="TabIndicator">
+        <!-- 图标数组,应用在单图标渐变 -->
         <attr name="tabIcons" format="reference" />
+        <!-- 选中图标数组 -->
         <attr name="tabSelectedIcons" format="reference" />
+        <!-- 未选中图标数组 -->
         <attr name="tabUnselectedIcons" format="reference" />
+        <!-- 文字数组 -->
         <attr name="tabLabels" format="reference" />
+        <!-- 选中时颜色 -->
         <attr name="tabSelectedColor" format="reference|color" />
+        <!-- 未选中时颜色 -->
         <attr name="tabUnselectedColor" format="reference|color" />
+        <!-- 文字字体大小 -->
         <attr name="tabTextSize" format="dimension" />
+        <!-- 条目边距 -->
         <attr name="tabPadding" format="dimension" />
+        <!-- 是否渐变切换 -->
+        <attr name="tabGradualChange" format="boolean" />
     </declare-styleable>
 
 </resources>

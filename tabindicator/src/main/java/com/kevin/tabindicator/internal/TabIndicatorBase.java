@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * 版权所有：XXX有限公司
  *
- * TabViewBase
+ * TabIndicatorBase
  *
  * @author zhou.wenkai ,Created on 2016-2-25 21:15:04
  * 		   Major Function：<b>底部导航基类</b>

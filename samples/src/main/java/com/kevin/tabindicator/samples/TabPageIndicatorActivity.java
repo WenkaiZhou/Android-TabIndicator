@@ -12,7 +12,7 @@ import com.kevin.tabindicator.TabPageIndicatorEx;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class TabPageIndicatorActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
     private TabPageIndicatorEx mTabPageIndictor;
@@ -26,9 +26,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_tabpage_indicator);
 
-//        getActionBar().setDisplayShowHomeEnabled(false);
         mViewPager = (ViewPager) findViewById(R.id.id_viewpager);
         mTabPageIndictor = (TabPageIndicatorEx) this.findViewById(R.id.second_act_tpi);
 
@@ -75,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mTabPageIndictor.setIndicateDisplay(1, true);
+        mTabPageIndictor.setIsGradualChange(false);
     }
 
 

@@ -6,7 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.AttributeSet;
 
-import com.kevin.tabindicator.internal.TabIndicatorBase;
+import com.kevin.tabindicator.internal.TabPageIndicatorBase;
 
 /**
  * 版权所有：XXX有限公司
@@ -19,18 +19,12 @@ import com.kevin.tabindicator.internal.TabIndicatorBase;
  *         注:如果您修改了本类请填写以下内容作为记录，如非本人操作劳烦通知，谢谢！！！
  * @author mender，Modified Date Modify Content:
  */
-public class TabPageIndicatorEx extends TabIndicatorBase<TabPageView> implements OnPageChangeListener {
+public class TabPageIndicatorEx extends TabPageIndicatorBase<TabPageView> implements OnPageChangeListener {
 
 	/** 底部菜单图标数组 */
 	private int[] mDrawableIds;
 	/** 用于ViewPager会渐变颜色 */
 	private ViewPager mViewPager;
-
-	public void setViewPager(ViewPager viewPager) {
-		if(null == viewPager) return;
-		this.mViewPager = viewPager;
-		mViewPager.addOnPageChangeListener(this);
-	}
 
 	public TabPageIndicatorEx(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -58,15 +52,19 @@ public class TabPageIndicatorEx extends TabIndicatorBase<TabPageView> implements
 	protected void setProperties(TabPageView tabPageView, int index) {
 		tabPageView.setIcon(mDrawableIds[index]);
 	}
+
+	public void setViewPager(ViewPager viewPager) {
+		this.mViewPager = viewPager;
+		mViewPager.addOnPageChangeListener(this);
+	}
 	
 	@Override
 	public void onPageScrollStateChanged(int position) {
 	}
 
 	@Override
-	public void onPageScrolled(int position, float positionOffset,
-			int positionOffsetPixels) {
-		if (positionOffset > 0) {
+	public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+		if (mIsGradualChange && positionOffset > 0) {
 			TabPageView left = mCheckedList.get(position);
 			TabPageView right = mCheckedList.get(position + 1);
 
@@ -77,6 +75,8 @@ public class TabPageIndicatorEx extends TabIndicatorBase<TabPageView> implements
 
 	@Override
 	public void onPageSelected(int position) {
-//		setTabsDisplay(position);
+		if(!mIsGradualChange) {
+			setTabsDisplay(position);
+		}
 	}
 }
