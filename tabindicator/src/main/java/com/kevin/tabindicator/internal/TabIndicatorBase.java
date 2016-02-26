@@ -35,12 +35,14 @@ public class TabIndicatorBase<T extends TabViewBase> extends LinearLayout implem
     protected int mUnselectedColor;
     /** 文本大小 */
     protected int mTextSize;
-    /** 存放底部菜单的各TabPageView */
+    /** 底部菜单padding */
+    protected int mTabPadding;
+    /** 存放底部菜单 */
     protected List<T> mCheckedList = new ArrayList<>();
     /** 存放底部菜单每项View */
     protected List<View> mViewList = new ArrayList<>();
     /** 存放指示点 */
-    protected List<ImageView> mIndicateImgs = new ArrayList<>();
+    protected List<IndicateView> mIndicateImgs = new ArrayList<>();
 
     public TabIndicatorBase(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -53,23 +55,25 @@ public class TabIndicatorBase<T extends TabViewBase> extends LinearLayout implem
 
         //Load defaults from resources
         final Resources res = getResources();
-        final int defaultSelectedColor = res.getColor(R.color.default_page_selected_color);
-        final int defaultUnselectedColor = res.getColor(R.color.default_page_unselected_color);
-        final float defaultTextSize = res.getDimension(R.dimen.default_page_text_size);
+        final int defaultSelectedColor = res.getColor(R.color.default_tab_view_selected_color);
+        final int defaultUnselectedColor = res.getColor(R.color.default_tab_view_unselected_color);
+        final float defaultTextSize = res.getDimension(R.dimen.default_tab_view_text_size);
+        final float defaultTabPadding = res.getDimension(R.dimen.default_tab_view_padding);
 
         // Styleables from XML
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TabIndicator);
 
         // 读取布局中，各个tab使用的文字
-        if (a.hasValue(R.styleable.TabIndicator_labels)) {
-            mLabels = a.getTextArray(R.styleable.TabIndicator_labels);
+        if (a.hasValue(R.styleable.TabIndicator_tabLabels)) {
+            mLabels = a.getTextArray(R.styleable.TabIndicator_tabLabels);
         } else {
             throw new IllegalArgumentException("Please set labels attr in XML!");
         }
 
-        mSelectedColor = a.getColor(R.styleable.TabIndicator_selectedColor, defaultSelectedColor);
-        mUnselectedColor = a.getColor(R.styleable.TabIndicator_unselectedColor, defaultUnselectedColor);
-        mTextSize = (int) a.getDimension(R.styleable.TabIndicator_android_textSize, defaultTextSize);
+        mSelectedColor = a.getColor(R.styleable.TabIndicator_tabSelectedColor, defaultSelectedColor);
+        mUnselectedColor = a.getColor(R.styleable.TabIndicator_tabUnselectedColor, defaultUnselectedColor);
+        mTextSize = (int) a.getDimension(R.styleable.TabIndicator_tabTextSize, defaultTextSize);
+        mTabPadding = (int) a.getDimension(R.styleable.TabIndicator_tabPadding, defaultTabPadding);
 
         handleStyledAttributes(a);
         a.recycle();
@@ -115,8 +119,8 @@ public class TabIndicatorBase<T extends TabViewBase> extends LinearLayout implem
         if (size <= position) {
             return;
         }
-        ImageView indicateImg = mIndicateImgs.get(position);
-        indicateImg.setVisibility(visible ? View.VISIBLE : View.GONE);
+        IndicateView indicateImg = mIndicateImgs.get(position);
+        indicateImg.setDisplay(visible);
     }
 
 }

@@ -3,13 +3,14 @@
 
     <!-- TabIndicator -->
     <declare-styleable name="TabIndicator">
-        <attr name="icons" format="reference" />
-        <attr name="selectedIcons" format="reference" />
-        <attr name="unselectedIcons" format="reference" />
-        <attr name="labels" format="reference" />
-        <attr name="selectedColor" format="color" />
-        <attr name="unselectedColor" format="color" />
-        <attr name="android:textSize" />
+        <attr name="tabIcons" format="reference" />
+        <attr name="tabSelectedIcons" format="reference" />
+        <attr name="tabUnselectedIcons" format="reference" />
+        <attr name="tabLabels" format="reference" />
+        <attr name="tabSelectedColor" format="reference|color" />
+        <attr name="tabUnselectedColor" format="reference|color" />
+        <attr name="tabTextSize" format="dimension" />
+        <attr name="tabPadding" format="dimension" />
     </declare-styleable>
 
 </resources>

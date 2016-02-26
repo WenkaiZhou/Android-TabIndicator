@@ -2,6 +2,7 @@ package com.kevin.tabindicator;
 
 import android.content.Context;
 import android.util.AttributeSet;
+
 import com.kevin.tabindicator.internal.TabViewBase;
 
 /**
@@ -12,13 +13,13 @@ import com.kevin.tabindicator.internal.TabViewBase;
  * @date 2016-2-24 10:16:20
  * @Author zhouwk
  */
-public class TabIndicator extends TabViewBase {
+public class TabIndicator_save extends TabViewBase {
 
-	public TabIndicator(Context context) {
+	public TabIndicator_save(Context context) {
 		super(context);
 	}
-	
-	public TabIndicator(Context context, AttributeSet attrs) {
+
+	public TabIndicator_save(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
 

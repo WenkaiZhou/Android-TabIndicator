@@ -8,8 +8,8 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 
+import com.kevin.tabindicator.internal.IndicateView;
 import com.kevin.tabindicator.internal.TabIndicatorBase;
 
 /**
@@ -48,7 +48,7 @@ public class TabPageIndicatorEx extends TabIndicatorBase<TabPageView> implements
 	@Override
 	protected void handleStyledAttributes(TypedArray a) {
 		// 读取布局中，各个tab使用的图标
-		int iconsResId = a.getResourceId(R.styleable.TabIndicator_icons, 0);
+		int iconsResId = a.getResourceId(R.styleable.TabIndicator_tabIcons, 0);
 		TypedArray ta = getContext().getResources().obtainTypedArray(iconsResId);
 		int len = ta.length();
 		mDrawableIds = new int[len];
@@ -75,6 +75,7 @@ public class TabPageIndicatorEx extends TabIndicatorBase<TabPageView> implements
 			// 每个tab对应的layout
 			final View view = inflater.inflate(R.layout.tab_item, null);
 			final TabPageView tabItemView = (TabPageView) view.findViewById(R.id.tab_icon_view);
+			tabItemView.setPadding(mTabPadding, mTabPadding, mTabPadding, mTabPadding);
 			// 图标及文字
 			tabItemView.setIcon(mDrawableIds[i]);
 			tabItemView.setText(mLabels[i]);
@@ -82,7 +83,9 @@ public class TabPageIndicatorEx extends TabIndicatorBase<TabPageView> implements
 			tabItemView.setUnselectedColor(mUnselectedColor);
 			tabItemView.setTextSize(mTextSize);
 			// 指示点ImageView
-			final ImageView indicateImg = (ImageView) view.findViewById(R.id.indicate_img);
+			final IndicateView indicateImg = (IndicateView) view.findViewById(R.id.indicate_img);
+//			indicateImg.setBackgroundResource(R.drawable.indicate_background);
+
 			this.addView(view, params);
 			
 			tabItemView.setTag(index);						// CheckedTextView设置索引作为tag，以便后续更改颜色、图片等

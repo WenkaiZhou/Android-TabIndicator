@@ -73,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
                 mViewPager.setCurrentItem(index, false);
             }
         });
+
+        mTabPageIndictor.setIndicateDisplay(1, true);
     }
 
 
