@@ -6,10 +6,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.AttributeSet;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 
-import com.kevin.tabindicator.internal.IndicateView;
 import com.kevin.tabindicator.internal.TabIndicatorBase;
 
 /**
@@ -42,7 +40,7 @@ public class TabPageIndicatorEx extends TabIndicatorBase<TabPageView> implements
 		super(context, attrs);
 
 		// 初始化控件
-		initRealView(context);
+		initRealView();
 	}
 
 	@Override
@@ -61,20 +59,15 @@ public class TabPageIndicatorEx extends TabIndicatorBase<TabPageView> implements
 	/**
 	 * 初始化控件
 	 */
-	private void initRealView(final Context context) {
-		LayoutInflater inflater = LayoutInflater.from(context);
-		LayoutParams params = new LayoutParams(
-				LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
-		params.weight = 1.0f;
+	private void initRealView() {
+		LayoutParams params = new LayoutParams(0, LayoutParams.MATCH_PARENT, 1);
 		params.gravity = Gravity.CENTER;
 
 		int size = mLabels.length;
 		for (int i = 0; i < size; i++) {
 			final int index = i;
 
-			// 每个tab对应的layout
-			final View view = inflater.inflate(R.layout.tab_item, null);
-			final TabPageView tabItemView = (TabPageView) view.findViewById(R.id.tab_icon_view);
+			TabPageView tabItemView = new TabPageView(getContext());
 			tabItemView.setPadding(mTabPadding, mTabPadding, mTabPadding, mTabPadding);
 			// 图标及文字
 			tabItemView.setIcon(mDrawableIds[i]);
@@ -82,17 +75,13 @@ public class TabPageIndicatorEx extends TabIndicatorBase<TabPageView> implements
 			tabItemView.setSelectedColor(mSelectedColor);
 			tabItemView.setUnselectedColor(mUnselectedColor);
 			tabItemView.setTextSize(mTextSize);
-			// 指示点ImageView
-			final IndicateView indicateImg = (IndicateView) view.findViewById(R.id.indicate_img);
-//			indicateImg.setBackgroundResource(R.drawable.indicate_background);
 
-			this.addView(view, params);
+			this.addView(tabItemView, params);
 			
 			tabItemView.setTag(index);						// CheckedTextView设置索引作为tag，以便后续更改颜色、图片等
 			mCheckedList.add(tabItemView);					// 将CheckedTextView添加到list中，便于操作
-			mIndicateImgs.add(indicateImg);					// 将指示图片加到list，便于控制显示隐藏
-			mViewList.add(view);							// 将各个tab的View添加到list
-			view.setOnClickListener(new OnClickListener() {
+			mViewList.add(tabItemView);							// 将各个tab的View添加到list
+			tabItemView.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
@@ -106,7 +95,7 @@ public class TabPageIndicatorEx extends TabIndicatorBase<TabPageView> implements
 			// 初始化 底部菜单选中状态,默认第一个选中
 			if (i == 0) {
 				tabItemView.setIconAlpha(1.0f);
-//				view.setBackgroundColor(Color.rgb(240, 241, 242));
+//				tabItemView.setBackgroundColor(Color.rgb(240, 241, 242));
 			} else {
 				tabItemView.setIconAlpha(0);
 //				view.setBackgroundColor(Color.rgb(250, 250, 250));

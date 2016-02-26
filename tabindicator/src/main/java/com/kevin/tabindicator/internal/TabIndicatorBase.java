@@ -41,8 +41,6 @@ public class TabIndicatorBase<T extends TabViewBase> extends LinearLayout implem
     protected List<T> mCheckedList = new ArrayList<>();
     /** 存放底部菜单每项View */
     protected List<View> mViewList = new ArrayList<>();
-    /** 存放指示点 */
-    protected List<IndicateView> mIndicateImgs = new ArrayList<>();
 
     public TabIndicatorBase(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -115,12 +113,12 @@ public class TabIndicatorBase<T extends TabViewBase> extends LinearLayout implem
      *            是否显示，如果false，则都不显示
      */
     public void setIndicateDisplay(int position, boolean visible) {
-        int size = mIndicateImgs.size();
-        if (size <= position) {
-            return;
-        }
-        IndicateView indicateImg = mIndicateImgs.get(position);
-        indicateImg.setDisplay(visible);
+//        int size = mIndicateImgs.size();
+//        if (size <= position) {
+//            return;
+//        }
+//        IndicateView indicateImg = mIndicateImgs.get(position);
+//        indicateImg.setDisplay(visible);
     }
 
 }
