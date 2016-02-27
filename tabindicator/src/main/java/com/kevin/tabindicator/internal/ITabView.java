@@ -43,6 +43,12 @@ public interface ITabView {
     void setTextSize(int textSize);
 
     /**
+     * 设置指示点大小
+     * @param indicatorSize
+     */
+    void setIndicatorSize(int indicatorSize);
+
+    /**
      * 设置是否选中
      * @param isSelected
      */

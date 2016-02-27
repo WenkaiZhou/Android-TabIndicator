@@ -36,6 +36,8 @@ public abstract class TabIndicatorBase<T extends TabViewBase> extends LinearLayo
     protected int mTextSize;
     /** 底部菜单padding */
     protected int mTabPadding;
+    /** 指示点大小 */
+    private int mIndicatorSize;
     /** 存放底部菜单 */
     protected List<T> mCheckedList = new ArrayList<>();
     /** 回调接口，用于获取tab的选中状态 */
@@ -56,6 +58,7 @@ public abstract class TabIndicatorBase<T extends TabViewBase> extends LinearLayo
         final int defaultUnselectedColor = res.getColor(R.color.default_tab_view_unselected_color);
         final float defaultTextSize = res.getDimension(R.dimen.default_tab_view_text_size);
         final float defaultTabPadding = res.getDimension(R.dimen.default_tab_view_padding);
+        final float defaultIndicatorSize = res.getDimension(R.dimen.default_tab_view_indicator_size);
 
         // Styleables from XML
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TabIndicator);
@@ -63,13 +66,12 @@ public abstract class TabIndicatorBase<T extends TabViewBase> extends LinearLayo
         // 读取布局中，各个tab使用的文字
         if (a.hasValue(R.styleable.TabIndicator_tabLabels)) {
             mLabels = a.getTextArray(R.styleable.TabIndicator_tabLabels);
-        } else {
-            throw new IllegalArgumentException("Please set labels attr in XML!");
         }
 
         mSelectedColor = a.getColor(R.styleable.TabIndicator_tabSelectedColor, defaultSelectedColor);
         mUnselectedColor = a.getColor(R.styleable.TabIndicator_tabUnselectedColor, defaultUnselectedColor);
         mTextSize = (int) a.getDimension(R.styleable.TabIndicator_tabTextSize, defaultTextSize);
+        mIndicatorSize = (int) a.getDimension(R.styleable.TabIndicator_TabIndicatorSize, defaultIndicatorSize);
         mTabPadding = (int) a.getDimension(R.styleable.TabIndicator_tabPadding, defaultTabPadding);
 
         handleStyledAttributes(a);
@@ -85,17 +87,21 @@ public abstract class TabIndicatorBase<T extends TabViewBase> extends LinearLayo
         LayoutParams params = new LayoutParams(0, LayoutParams.MATCH_PARENT, 1);
         params.gravity = Gravity.CENTER;
 
-        int size = mLabels.length;
+        int size = getTabSize();
         for (int i = 0; i < size; i++) {
             final int index = i;
 
             T tabItemView = createTabView();
             tabItemView.setPadding(mTabPadding, mTabPadding, mTabPadding, mTabPadding);
             // 图标及文字
-            tabItemView.setText(mLabels[i]);
+            if(null != mLabels) {
+                tabItemView.setText(mLabels[index]);
+                tabItemView.setTextSize(mTextSize);
+            }
             tabItemView.setSelectedColor(mSelectedColor);
             tabItemView.setUnselectedColor(mUnselectedColor);
-            tabItemView.setTextSize(mTextSize);
+            tabItemView.setIndicatorSize(mIndicatorSize);
+
             setProperties(tabItemView, i);
 
             this.addView(tabItemView, params);
@@ -144,6 +150,12 @@ public abstract class TabIndicatorBase<T extends TabViewBase> extends LinearLayo
      * @param t
      */
     protected abstract void setProperties(T t, int index);
+
+    /**
+     * 获取条目个数
+     * @return
+     */
+    protected abstract int getTabSize();
 
     /**
      * 设置底部导航中图片显示状态和字体颜色

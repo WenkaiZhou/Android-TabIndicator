@@ -21,6 +21,8 @@
         <attr name="tabPadding" format="dimension" />
         <!-- 是否渐变切换 -->
         <attr name="tabGradualChange" format="boolean" />
+        <!-- 指示点大小 -->
+        <attr name="TabIndicatorSize" format="dimension" />
     </declare-styleable>
 
 </resources>

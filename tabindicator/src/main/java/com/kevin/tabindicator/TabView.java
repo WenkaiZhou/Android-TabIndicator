@@ -25,8 +25,6 @@ public class TabView extends TabViewBase {
 	private Bitmap mSelectedIconBitmap;
 	private Bitmap mUnselectedIconBitmap;
 
-	private boolean isSelected;
-
 	public TabView(Context context) {
 		super(context);
 	}
@@ -37,19 +35,13 @@ public class TabView extends TabViewBase {
 
 	@Override
 	protected void onDraw(Canvas canvas) {
+		super.onDraw(canvas);
 		setupTargetBitmap(canvas);
-		drawTargetText(canvas);
+		drawIndicator(canvas);
 	}
 
 	private void setupTargetBitmap(Canvas canvas) {
 		canvas.drawBitmap(isSelected ? mSelectedIconBitmap : mUnselectedIconBitmap, null, mIconRect, null);
-	}
-
-	private void drawTargetText(Canvas canvas) {
-		mTextPaint.setColor(isSelected ? mSelectedColor : mUnselectedColor);
-		canvas.drawText(mText, mIconRect.left + mIconRect.width() / 2
-						- mTextBound.width() / 2,
-				mIconRect.bottom + mTextBound.height(), mTextPaint);
 	}
 
 	@Override

@@ -12,7 +12,7 @@ import android.widget.ListView;
  */
 public class LauncherActivity extends ListActivity{
 
-    public static final String[] options = { "TabPageIndicator"};
+    public static final String[] options = { "TabPageIndicator", "TabIndicator"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +28,9 @@ public class LauncherActivity extends ListActivity{
             default:
             case 0:
                 intent = new Intent(this, TabPageIndicatorActivity.class);
+                break;
+            case 1:
+                intent = new Intent(this, TabIndicatorActivity.class);
                 break;
         }
 

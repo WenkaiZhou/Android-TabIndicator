@@ -2,5 +2,6 @@
     
     <dimen name="default_tab_view_text_size">12sp</dimen>
     <dimen name="default_tab_view_padding">4dp</dimen>
+    <dimen name="default_tab_view_indicator_size">12dp</dimen>
 
 </resources>

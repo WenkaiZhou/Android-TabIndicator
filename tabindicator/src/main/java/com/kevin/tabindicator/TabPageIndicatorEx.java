@@ -49,4 +49,9 @@ public class TabPageIndicatorEx extends TabPageIndicatorBase<TabPageView> implem
 	protected void setProperties(TabPageView tabPageView, int index) {
 		tabPageView.setIcon(mDrawableIds[index]);
 	}
+
+	@Override
+	protected int getTabSize() {
+		return mDrawableIds.length;
+	}
 }

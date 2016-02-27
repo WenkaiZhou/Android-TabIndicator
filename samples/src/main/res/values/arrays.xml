@@ -15,4 +15,16 @@
         <item>@mipmap/ic_menu_start_conversation</item>
     </string-array>
 
+    <string-array name="qq_normal_icon">
+        <item>@mipmap/skin_tab_icon_conversation_normal</item>
+        <item>@mipmap/skin_tab_icon_contact_normal</item>
+        <item>@mipmap/skin_tab_icon_plugin_normal</item>
+    </string-array>
+
+    <string-array name="qq_selected_icon">
+        <item>@mipmap/skin_tab_icon_conversation_selected</item>
+        <item>@mipmap/skin_tab_icon_contact_selected</item>
+        <item>@mipmap/skin_tab_icon_plugin_selected</item>
+    </string-array>
+
 </resources>

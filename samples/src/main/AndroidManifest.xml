@@ -16,6 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".TabPageIndicatorActivity"/>
+        <activity android:name=".TabIndicatorActivity"/>
     </application>
 
 </manifest>

@@ -17,7 +17,7 @@ import java.util.List;
 public class TabPageIndicatorActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
-    private TabPageIndicatorEx mTabPageIndictor;
+    private TabPageIndicatorEx mTabPageIndicatorEx;
     private List<Fragment> mTabs = new ArrayList<>();
     private FragmentPagerAdapter mAdapter;
 
@@ -32,15 +32,21 @@ public class TabPageIndicatorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabpage_indicator);
 
-        mViewPager = (ViewPager) findViewById(R.id.id_viewpager);
-        mTabPageIndictor = (TabPageIndicatorEx) this.findViewById(R.id.second_act_tpi);
-
-        initDatas();
-
-        mViewPager.setAdapter(mAdapter);
+        initViews();
+        initEvents();
     }
 
-    private void initDatas() {
+    /**
+     * 初始化View
+     */
+    private void initViews() {
+        mViewPager = (ViewPager) findViewById(R.id.id_viewpager);
+        mTabPageIndicatorEx = (TabPageIndicatorEx) findViewById(R.id.tabpage_act_tpi);
+        initTabIndicator();
+        initViewPager();
+    }
+
+    private void initViewPager() {
 
         for (String title : mTitles) {
             TabFragment tabFragment = new TabFragment();
@@ -62,9 +68,20 @@ public class TabPageIndicatorActivity extends AppCompatActivity {
                 return mTabs.get(arg0);
             }
         };
+        mViewPager.setAdapter(mAdapter);
+    }
 
-        initTabIndicator();
+    /**
+     * 初始化事件
+     */
+    private void initEvents() {
+        mTabPageIndicatorEx.setOnTabSelectedListener(new TabPageIndicatorEx.OnTabSelectedListener() {
 
+            @Override
+            public void onTabSelected(int index) {
+                mViewPager.setCurrentItem(index, false);
+            }
+        });
     }
 
     @Override
@@ -76,24 +93,17 @@ public class TabPageIndicatorActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getTitle().toString().equals("改变切换模式")) {
-            mTabPageIndictor.setIsGradualChange(!isGradualChange);
+            mTabPageIndicatorEx.setIsGradualChange(!isGradualChange);
             isGradualChange = !isGradualChange;
         }
         return true;
     }
 
     private void initTabIndicator() {
-        mTabPageIndictor.setViewPager(mViewPager);
-        mTabPageIndictor.setOnTabSelectedListener(new TabPageIndicatorEx.OnTabSelectedListener() {
-
-            @Override
-            public void onTabSelected(int index) {
-                mViewPager.setCurrentItem(index, false);
-            }
-        });
-
-        mTabPageIndictor.setIndicateDisplay(1, true);
+        mTabPageIndicatorEx.setViewPager(mViewPager);
+        mTabPageIndicatorEx.setIndicateDisplay(0, true);
+        mTabPageIndicatorEx.setIndicateDisplay(1, true);
+        mTabPageIndicatorEx.setIndicateDisplay(2, true);
     }
-
 
 }
