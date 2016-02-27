@@ -15,8 +15,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TabPageIndicatorActivity"/>
+        <activity android:name=".TabPageIndicatorExActivity"/>
         <activity android:name=".TabIndicatorActivity"/>
+        <activity android:name=".TabPageIndicatorActivity"/>
     </application>
 
 </manifest>

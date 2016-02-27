@@ -15,28 +15,28 @@ import com.kevin.tabindicator.internal.TabViewBase;
 /**
  * 版权所有：XXX有限公司
  *
- * TabPageView
+ * TabPageViewEx
  *
- * @author zhou.wenkai ,Created on 2016-2-27 16:09:06
- * 		   Major Function：<b>TabPageIndicator的每一个条目</b>
+ * @author zhou.wenkai ,Created on 2016-2-24 10:54:41
+ * 		   Major Function：<b>TabPageIndicatorEx的每一个条目</b>
  *
  *         注:如果您修改了本类请填写以下内容作为记录，如非本人操作劳烦通知，谢谢！！！
  * @author mender，Modified Date Modify Content:
  */
-public class TabPageView extends TabViewBase {
-
-	private Paint mPaint = new Paint();
+public class TabPageViewEx extends TabViewBase {
+	private Bitmap mBitmap;
+	private Canvas mCanvas;
+	private Paint mPaint;
 	/** 透明度 0.0-1.0 */
 	private float mAlpha = 0f;
 	/** 图标 */
-	private Bitmap mSelectedIconBitmap;
-	private Bitmap mUnselectedIconBitmap;
+	private Bitmap mIconBitmap;
 
-	public TabPageView(Context context) {
+	public TabPageViewEx(Context context) {
 		super(context);
 	}
 
-	public TabPageView(Context context, AttributeSet attrs) {
+	public TabPageViewEx(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
 
@@ -44,34 +44,30 @@ public class TabPageView extends TabViewBase {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		int alpha = (int) Math.ceil((255 * mAlpha));
-		drawSourceBitmap(canvas, alpha);
-		drawTargetBitmap(canvas, alpha);
+		canvas.drawBitmap(mIconBitmap, null, mIconRect, null);
+		setupTargetBitmap(alpha);
 		if(null != mText) {
 			drawSourceText(canvas, alpha);
 			drawTargetText(canvas, alpha);
 		}
+		canvas.drawBitmap(mBitmap, 0, 0, null);
 		drawIndicator(canvas);
 	}
 
-	private void drawSourceBitmap(Canvas canvas, int alpha) {
-		mPaint.setAntiAlias(true);
-		mPaint.setDither(true);
-		mPaint.setAlpha(255 - alpha);
-		canvas.drawBitmap(mUnselectedIconBitmap, null, mIconRect, mPaint);
-	}
-
-	private void drawTargetBitmap(Canvas canvas, int alpha) {
+	private void setupTargetBitmap(int alpha) {
+		mBitmap = Bitmap.createBitmap(getMeasuredWidth(), getMeasuredHeight(), Config.ARGB_8888);
+		mCanvas = new Canvas(mBitmap);
+		mPaint = new Paint();
+		mPaint.setColor(mSelectedColor);
 		mPaint.setAntiAlias(true);
 		mPaint.setDither(true);
 		mPaint.setAlpha(alpha);
-		canvas.drawBitmap(mSelectedIconBitmap, null, mIconRect, mPaint);
+		mCanvas.drawRect(mIconRect, mPaint);
+		mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
+		mPaint.setAlpha(255);
+		mCanvas.drawBitmap(mIconBitmap, null, mIconRect, mPaint);
 	}
 
-	/**
-	 * 画未选中文字
-	 * @param canvas
-	 * @param alpha
-	 */
 	private void drawSourceText(Canvas canvas, int alpha) {
 		mTextPaint.setTextSize(mTextSize);
 		mTextPaint.setColor(mUnselectedColor);
@@ -81,11 +77,6 @@ public class TabPageView extends TabViewBase {
 				mIconRect.bottom + mTextBound.height(), mTextPaint);
 	}
 
-	/**
-	 * 画选中文字
-	 * @param canvas
-	 * @param alpha
-	 */
 	private void drawTargetText(Canvas canvas, int alpha) {
 		mTextPaint.setColor(mSelectedColor);
 		mTextPaint.setAlpha(alpha);
@@ -104,25 +95,14 @@ public class TabPageView extends TabViewBase {
 		}
 	}
 
-	public void setSelectedIcon(int resId) {
-		this.mSelectedIconBitmap = BitmapFactory.decodeResource(getResources(), resId);
+	public void setIcon(int resId) {
+		this.mIconBitmap = BitmapFactory.decodeResource(getResources(), resId);
 		if (mIconRect != null)
 			invalidateView();
 	}
 
-	public void setSelectedIcon(Bitmap iconBitmap) {
-		this.mSelectedIconBitmap = iconBitmap;
-		if (mIconRect != null)
-			invalidateView();
-	}
-	public void setUnselectedIcon(int resId) {
-		this.mUnselectedIconBitmap = BitmapFactory.decodeResource(getResources(), resId);
-		if (mIconRect != null)
-			invalidateView();
-	}
-
-	public void setUnselectedIcon(Bitmap iconBitmap) {
-		this.mUnselectedIconBitmap = iconBitmap;
+	public void setIcon(Bitmap iconBitmap) {
+		this.mIconBitmap = iconBitmap;
 		if (mIconRect != null)
 			invalidateView();
 	}

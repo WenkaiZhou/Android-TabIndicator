@@ -141,6 +141,12 @@ public abstract class TabViewBase extends View implements ITabView {
     public abstract void setSelected(boolean selected);
 
     /**
+     * 设置切换颜色渐变
+     * @param alpha
+     */
+    protected void setIconAlpha(float alpha){}
+
+    /**
      * 设置指示点的显示
      *
      * @param visible

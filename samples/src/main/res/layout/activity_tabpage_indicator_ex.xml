@@ -16,14 +16,17 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom" >
 
-        <com.kevin.tabindicator.TabPageIndicator
+        <com.kevin.tabindicator.TabPageIndicatorEx
             android:id="@+id/tabpage_act_tpi"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@drawable/tabbg"
             kevin:tabTextSize="12sp"
-            kevin:tabSelectedIcons="@array/qq_selected_icon"
-            kevin:tabUnselectedIcons="@array/qq_normal_icon" />
+            kevin:tabIcons="@array/bottom_bar_icons"
+            kevin:tabLabels="@array/bottom_bar_labels"
+            kevin:tabSelectedColor="#3F51B5"
+            kevin:tabUnselectedColor="#555555"
+            kevin:tabPadding="8dp"/>
     </FrameLayout>
 
 </LinearLayout>

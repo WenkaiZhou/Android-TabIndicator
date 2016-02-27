@@ -18,7 +18,7 @@ import com.kevin.tabindicator.R;
  *         注:如果您修改了本类请填写以下内容作为记录，如非本人操作劳烦通知，谢谢！！！
  * @author mender，Modified Date Modify Content:
  */
-public abstract class TabPageIndicatorBase<T extends TabPageViewBase> extends TabIndicatorBase<T> implements ViewPager.OnPageChangeListener {
+public abstract class TabPageIndicatorBase<T extends TabViewBase> extends TabIndicatorBase<T> implements ViewPager.OnPageChangeListener {
 
     /** 是否渐变切换 */
     protected boolean mIsGradualChange;

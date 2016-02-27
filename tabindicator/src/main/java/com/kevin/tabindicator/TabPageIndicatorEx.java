@@ -18,7 +18,7 @@ import com.kevin.tabindicator.internal.TabPageIndicatorBase;
  *         注:如果您修改了本类请填写以下内容作为记录，如非本人操作劳烦通知，谢谢！！！
  * @author mender，Modified Date Modify Content:
  */
-public class TabPageIndicatorEx extends TabPageIndicatorBase<TabPageView> implements OnPageChangeListener {
+public class TabPageIndicatorEx extends TabPageIndicatorBase<TabPageViewEx> implements OnPageChangeListener {
 
 	/** 底部菜单图标数组 */
 	private int[] mDrawableIds;
@@ -41,12 +41,12 @@ public class TabPageIndicatorEx extends TabPageIndicatorBase<TabPageView> implem
 	}
 
 	@Override
-	protected TabPageView createTabView() {
-		return new TabPageView(getContext());
+	protected TabPageViewEx createTabView() {
+		return new TabPageViewEx(getContext());
 	}
 
 	@Override
-	protected void setProperties(TabPageView tabPageView, int index) {
+	protected void setProperties(TabPageViewEx tabPageView, int index) {
 		tabPageView.setIcon(mDrawableIds[index]);
 	}
 
