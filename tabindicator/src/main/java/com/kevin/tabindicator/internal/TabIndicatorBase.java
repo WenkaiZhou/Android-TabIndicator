@@ -72,7 +72,7 @@ public abstract class TabIndicatorBase<T extends TabViewBase> extends LinearLayo
         mUnselectedColor = a.getColor(R.styleable.TabIndicator_tabUnselectedColor, defaultUnselectedColor);
         mTextSize = (int) a.getDimension(R.styleable.TabIndicator_tabTextSize, defaultTextSize);
         mIndicatorSize = (int) a.getDimension(R.styleable.TabIndicator_TabIndicatorSize, defaultIndicatorSize);
-        mTabPadding = (int) a.getDimension(R.styleable.TabIndicator_tabPadding, defaultTabPadding);
+        mTabPadding = (int) a.getDimension(R.styleable.TabIndicator_tabItemPadding, defaultTabPadding);
 
         handleStyledAttributes(a);
         a.recycle();

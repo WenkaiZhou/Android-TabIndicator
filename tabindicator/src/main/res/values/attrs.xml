@@ -18,7 +18,7 @@
         <!-- 文字字体大小 -->
         <attr name="tabTextSize" format="dimension" />
         <!-- 条目边距 -->
-        <attr name="tabPadding" format="dimension" />
+        <attr name="tabItemPadding" format="dimension" />
         <!-- 是否渐变切换 -->
         <attr name="tabGradualChange" format="boolean" />
         <!-- 指示点大小 -->
