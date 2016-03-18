@@ -3,6 +3,7 @@ package com.kevin.tabindicator.internal;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
@@ -189,6 +190,26 @@ public abstract class TabIndicatorBase<T extends TabViewBase> extends LinearLayo
         }
         T tabView = mCheckedList.get(position);
         tabView.setIndicateDisplay(visible);
+    }
+
+    /**
+     * 设置指示点图片
+     * @param bitmap
+     */
+    public void setIndicateBitmap(Bitmap bitmap) {
+        for(T t : mCheckedList) {
+            t.setIndicatorBitmap(bitmap);
+        }
+    }
+
+    /**
+     * 设置指示点图片
+     * @param resId
+     */
+    public void setIndicateBitmap(int resId) {
+        for(T t : mCheckedList) {
+            t.setIndicatorBitmap(resId);
+        }
     }
 
     /**

@@ -38,8 +38,15 @@ public class TabView extends TabViewBase {
 		super.onDraw(canvas);
 		setupTargetBitmap(canvas);
 		drawIndicator(canvas);
+		if(null != mText) {
+			drawTargetText(canvas);
+		}
 	}
 
+	/**
+	 * 绘制图标图片
+	 * @param canvas
+	 */
 	private void setupTargetBitmap(Canvas canvas) {
 		canvas.drawBitmap(isSelected ? mSelectedIconBitmap : mUnselectedIconBitmap, null, mIconRect, null);
 	}

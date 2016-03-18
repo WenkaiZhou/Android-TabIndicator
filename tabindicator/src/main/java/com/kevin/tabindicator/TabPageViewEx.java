@@ -85,7 +85,6 @@ public class TabPageViewEx extends TabViewBase {
 				mIconRect.bottom + mTextBound.height(), mTextPaint);
 	}
 
-
 	@Override
 	public void setSelected(boolean selected) {
 		if(selected) {

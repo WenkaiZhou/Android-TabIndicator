@@ -10,6 +10,7 @@ import android.os.Looper;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.kevin.tabindicator.R;
 
@@ -42,19 +43,21 @@ public abstract class TabViewBase extends View implements ITabView {
     private boolean isIndicateDisplay;
     /** 指示点大小 */
     private int mIndicatorSize;
+    /** 指示点图片 */
+    private Bitmap mIndicatorBitmap;
 
     protected boolean isSelected;
 
     protected Paint mTextPaint = new Paint();
     protected Rect mTextBound = new Rect();
-    Bitmap mIconBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.update_hint);
 
     public TabViewBase(Context context) {
-        super(context);
+        this(context, null);
     }
 
     public TabViewBase(Context context, AttributeSet attrs) {
         super(context, attrs);
+        setIndicatorBitmap(R.drawable.update_hint);
     }
 
     @Override
@@ -77,14 +80,11 @@ public abstract class TabViewBase extends View implements ITabView {
         mIndicatorRect = new Rect(left + tabRealHeight* 4/5 - indicatorRadius, top, left+tabRealHeight* 4/5 + indicatorRadius, top + mIndicatorSize);
     }
 
-    @Override
-    protected void onDraw(Canvas canvas) {
-        if(null != mText) {
-            drawTargetText(canvas);
-        }
-    }
-
-    private void drawTargetText(Canvas canvas) {
+    /**
+     * 绘制文字
+     * @param canvas
+     */
+    protected void drawTargetText(Canvas canvas) {
         mTextPaint.setColor(isSelected ? mSelectedColor : mUnselectedColor);
         canvas.drawText(mText, mIconRect.left + mIconRect.width() / 2
                         - mTextBound.width() / 2,
@@ -92,12 +92,12 @@ public abstract class TabViewBase extends View implements ITabView {
     }
 
     /**
-     * 画指示点
+     * 绘制指示点
      * @param canvas
      */
     protected void drawIndicator(Canvas canvas) {
         if(isIndicateDisplay) {
-            canvas.drawBitmap(mIconBitmap, null, mIndicatorRect, null);
+            canvas.drawBitmap(mIndicatorBitmap, null, mIndicatorRect, null);
         }
     }
 
@@ -135,6 +135,16 @@ public abstract class TabViewBase extends View implements ITabView {
     @Override
     public void setIndicatorSize(int indicatorSize) {
         this.mIndicatorSize = indicatorSize;
+    }
+
+    @Override
+    public void setIndicatorBitmap(Bitmap bitmap) {
+        this.mIndicatorBitmap = bitmap;
+    }
+
+    @Override
+    public void setIndicatorBitmap(int resId) {
+        this.mIndicatorBitmap = BitmapFactory.decodeResource(getResources(), resId);
     }
 
     @Override

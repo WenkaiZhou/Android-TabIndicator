@@ -30,7 +30,7 @@
             kevin:tabIcons="@array/bottom_bar_icons"
             kevin:tabItemPadding="8dp"
             kevin:tabLabels="@array/bottom_bar_labels"
-            kevin:tabSelectedColor="#59BC24"
+            kevin:tabSelectedColor="#99D579"
             kevin:tabTextSize="12sp"
             kevin:tabUnselectedColor="#555555" />
     </FrameLayout>

@@ -53,6 +53,11 @@ public class TabPageView extends TabViewBase {
 		drawIndicator(canvas);
 	}
 
+	/**
+	 * 绘制未选中图标
+	 * @param canvas
+	 * @param alpha
+	 */
 	private void drawSourceBitmap(Canvas canvas, int alpha) {
 		mPaint.setAntiAlias(true);
 		mPaint.setDither(true);
@@ -60,6 +65,11 @@ public class TabPageView extends TabViewBase {
 		canvas.drawBitmap(mUnselectedIconBitmap, null, mIconRect, mPaint);
 	}
 
+	/**
+	 * 绘制选中图标
+	 * @param canvas
+	 * @param alpha
+	 */
 	private void drawTargetBitmap(Canvas canvas, int alpha) {
 		mPaint.setAntiAlias(true);
 		mPaint.setDither(true);
@@ -68,7 +78,7 @@ public class TabPageView extends TabViewBase {
 	}
 
 	/**
-	 * 画未选中文字
+	 * 绘制未选中文字
 	 * @param canvas
 	 * @param alpha
 	 */
@@ -82,7 +92,7 @@ public class TabPageView extends TabViewBase {
 	}
 
 	/**
-	 * 画选中文字
+	 * 绘制选中文字
 	 * @param canvas
 	 * @param alpha
 	 */

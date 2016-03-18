@@ -1,5 +1,7 @@
 package com.kevin.tabindicator.internal;
 
+import android.graphics.Bitmap;
+
 /**
  * 版权所有：XXX有限公司
  *
@@ -47,6 +49,18 @@ public interface ITabView {
      * @param indicatorSize
      */
     void setIndicatorSize(int indicatorSize);
+
+    /**
+     * 设置指示点图片
+     * @param bitmap
+     */
+    void setIndicatorBitmap(Bitmap bitmap);
+
+    /**
+     * 设置指示点图片
+     * @param resId
+     */
+    void setIndicatorBitmap(int resId);
 
     /**
      * 设置是否选中
