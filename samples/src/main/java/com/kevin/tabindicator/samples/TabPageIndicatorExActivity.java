@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.kevin.tabindicator.TabPageIndicatorEx;
 
@@ -18,6 +20,7 @@ public class TabPageIndicatorExActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
     private TabPageIndicatorEx mTabPageIndicatorEx;
+    private Button mChangeModeBtn;
     private List<Fragment> mTabs = new ArrayList<>();
     private FragmentPagerAdapter mAdapter;
 
@@ -42,6 +45,8 @@ public class TabPageIndicatorExActivity extends AppCompatActivity {
     private void initViews() {
         mViewPager = (ViewPager) findViewById(R.id.id_viewpager);
         mTabPageIndicatorEx = (TabPageIndicatorEx) findViewById(R.id.tabpage_act_tpi);
+        mChangeModeBtn = (Button) findViewById(R.id.tabpage_act_btn_change);
+
         initTabIndicator();
         initViewPager();
     }
@@ -75,6 +80,13 @@ public class TabPageIndicatorExActivity extends AppCompatActivity {
      * 初始化事件
      */
     private void initEvents() {
+        mChangeModeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTabPageIndicatorEx.setIsGradualChange(!isGradualChange);
+                isGradualChange = !isGradualChange;
+            }
+        });
         mTabPageIndicatorEx.setOnTabSelectedListener(new TabPageIndicatorEx.OnTabSelectedListener() {
 
             @Override
@@ -84,25 +96,8 @@ public class TabPageIndicatorExActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add("改变切换模式");
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getTitle().toString().equals("改变切换模式")) {
-            mTabPageIndicatorEx.setIsGradualChange(!isGradualChange);
-            isGradualChange = !isGradualChange;
-        }
-        return true;
-    }
-
     private void initTabIndicator() {
         mTabPageIndicatorEx.setViewPager(mViewPager);
-        mTabPageIndicatorEx.setIndicateDisplay(0, true);
-        mTabPageIndicatorEx.setIndicateDisplay(1, true);
         mTabPageIndicatorEx.setIndicateDisplay(2, true);
     }
 

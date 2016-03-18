@@ -1,6 +1,5 @@
 package com.kevin.tabindicator.samples;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -8,6 +7,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.kevin.tabindicator.TabPageIndicator;
 import com.kevin.tabindicator.TabPageIndicatorEx;
@@ -18,6 +19,7 @@ import java.util.List;
 public class TabPageIndicatorActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
+    private Button mChangeModeBtn;
     private TabPageIndicator mTabPageIndicator;
     private List<Fragment> mTabs = new ArrayList<>();
     private FragmentPagerAdapter mAdapter;
@@ -27,7 +29,6 @@ public class TabPageIndicatorActivity extends AppCompatActivity {
     private String[] mTitles = new String[] { "First Fragment!",
             "Second Fragment!", "Third Fragment!"};
 
-    @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +44,7 @@ public class TabPageIndicatorActivity extends AppCompatActivity {
     private void initViews() {
         mViewPager = (ViewPager) findViewById(R.id.id_viewpager);
         mTabPageIndicator = (TabPageIndicator) findViewById(R.id.tabpage_act_tpi);
+        mChangeModeBtn = (Button) findViewById(R.id.tabpage_act_btn_change);
         initTabIndicator();
         initViewPager();
     }
@@ -76,6 +78,13 @@ public class TabPageIndicatorActivity extends AppCompatActivity {
      * 初始化事件
      */
     private void initEvents() {
+        mChangeModeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTabPageIndicator.setIsGradualChange(!isGradualChange);
+                isGradualChange = !isGradualChange;
+            }
+        });
         mTabPageIndicator.setOnTabSelectedListener(new TabPageIndicatorEx.OnTabSelectedListener() {
 
             @Override
@@ -83,21 +92,6 @@ public class TabPageIndicatorActivity extends AppCompatActivity {
                 mViewPager.setCurrentItem(index, false);
             }
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add("改变切换模式");
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getTitle().toString().equals("改变切换模式")) {
-            mTabPageIndicator.setIsGradualChange(!isGradualChange);
-            isGradualChange = !isGradualChange;
-        }
-        return true;
     }
 
     private void initTabIndicator() {

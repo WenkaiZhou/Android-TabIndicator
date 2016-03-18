@@ -8,7 +8,10 @@
         android:id="@+id/tab_indicator_act_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="100dp"
+        android:textSize="16sp" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -21,9 +24,9 @@
             android:layout_height="60dp"
             android:background="@drawable/tabbg"
             kevin:tabSelectedColor="#3F51B5"
+            kevin:tabSelectedIcons="@array/qq_selected_icon"
             kevin:tabTextSize="12sp"
             kevin:tabUnselectedColor="#555555"
-            kevin:tabSelectedIcons="@array/qq_selected_icon"
             kevin:tabUnselectedIcons="@array/qq_normal_icon" />
     </FrameLayout>
 

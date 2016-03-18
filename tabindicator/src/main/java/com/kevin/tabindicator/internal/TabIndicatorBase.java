@@ -24,7 +24,7 @@ import java.util.List;
  *         注:如果您修改了本类请填写以下内容作为记录，如非本人操作劳烦通知，谢谢！！！
  * @author mender，Modified Date Modify Content:
  */
-public abstract class TabIndicatorBase<T extends TabViewBase> extends LinearLayout implements ITabIndicator {
+public abstract class TabIndicatorBase<T extends TabViewBase> extends LinearLayout {
 
     /** 底部菜单的文字数组 */
     protected CharSequence[] mLabels;

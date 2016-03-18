@@ -23,9 +23,10 @@ public class TabFragment extends Fragment {
         }
 
         TextView textView = new TextView(getActivity());
-        textView.setTextSize(20);
+        textView.setTextSize(16);
+        textView.setPadding(0,0,0,20);
         textView.setBackgroundColor(Color.parseColor("#ffffffff"));
-        textView.setGravity(Gravity.CENTER);
+        textView.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL);
         textView.setText(mTitle);
         return textView;
     }
