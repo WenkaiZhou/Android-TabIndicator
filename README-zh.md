@@ -18,7 +18,7 @@ TabIndicator 是一个强大的底部导航控件，并且提供了许多配置�
 如果您的项目使用 Gradle 构建, 只需要在您的`build.gradle`文件添加下面一行到 `dependencies` :
 
 ```
-	compile 'com.kevin:tabindicator:1.0.1'
+	compile 'com.kevin:tabindicator:1.0.2'
 ```
 
 ## 简单使用 ##

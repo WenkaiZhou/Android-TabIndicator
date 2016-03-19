@@ -18,7 +18,7 @@ Tab Indicator is a powerful bottom navigation widget, It provides some configura
 If you are building with Gradle, simply add the following line to the `dependencies` section of your `build.gradle` file:
 
 ```
-	compile 'com.kevin:tabindicator:1.0.1'
+	compile 'com.kevin:tabindicator:1.0.2'
 ```
 
 ## Simple Usage ##
